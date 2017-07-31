@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- General -->
+	<type name="Magento\Framework\Validator\AbstractValidator">
+		<plugin name="adfab_gdpr_validator" type="Adfab\Gdpr\Model\Validator" />
+	</type>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter">
+		<plugin name="adfab_gdpr_fulltext_filter" type="Adfab\Gdpr\Model\FulltextFilter" />
+	</type>
+	<type name="Magento\Framework\Console\CommandList">
+		<arguments>
+			<argument name="commands" xsi:type="array">
+				<item name="gdpr_crypt" xsi:type="object">Adfab\Gdpr\Console\Command\Crypt</item>
+			</argument>
+		</arguments>
+	</type>
+	<!-- Customer -->
+	<type name="Magento\Customer\Model\Customer">
+		<plugin name="adfab_gdpr_customer" type="Adfab\Gdpr\Model\Customer" />
+	</type>
+	<type name="Magento\Customer\Model\ResourceModel\Customer">
+		<plugin name="adfab_gdpr_resource_customer" type="Adfab\Gdpr\Model\ResourceModel\Customer" />
+	</type>
+	<type name="Magento\Customer\Model\ResourceModel\Address">
+		<plugin name="adfab_gdpr_resource_customer_address" type="Adfab\Gdpr\Model\ResourceModel\Address" />
+	</type>
+	<type name="Magento\Customer\Model\ResourceModel\Customer\Collection">
+		<plugin name="adfab_gdpr_resource_customer_collection" type="Adfab\Gdpr\Model\ResourceModel\Customer\Collection" />
+	</type>
+	<type name="Magento\Customer\Model\ResourceModel\Grid\Collection">
+		<plugin name="adfab_gdpr_resource_customer_grid_collection" type="Adfab\Gdpr\Model\ResourceModel\Customer\Collection" />
+	</type>
+	<type name="Magento\Customer\Model\ResourceModel\Online\Grid\Collection">
+		<plugin name="adfab_gdpr_resource_customer_online_grid_collection" type="Adfab\Gdpr\Model\ResourceModel\Customer\Collection" />
+	</type>
+	<type name="Magento\Customer\Model\ResourceModel\Address\Collection">
+		<plugin name="adfab_gdpr_resource_customer_address_collection" type="Adfab\Gdpr\Model\ResourceModel\Address\Collection" />
+	</type>
+	<!-- Quote -->
+	<type name="Magento\Quote\Model\ResourceModel\Quote">
+		<plugin name="adfab_gdpr_resource_quote" type="Adfab\Gdpr\Model\ResourceModel\Sale" />
+	</type>
+	<type name="Magento\Quote\Model\ResourceModel\Quote\Address">
+		<plugin name="adfab_gdpr_resource_quote_address" type="Adfab\Gdpr\Model\ResourceModel\Address" />
+	</type>
+	<type name="Magento\Quote\Model\ResourceModel\Quote\Collection">
+		<plugin name="adfab_gdpr_resource_quote_collection" type="Adfab\Gdpr\Model\ResourceModel\Sale\Collection" />
+	</type>
+	<type name="Magento\Quote\Model\ResourceModel\Quote\Address\Collection">
+		<plugin name="adfab_gdpr_resource_quote_address_collection" type="Adfab\Gdpr\Model\ResourceModel\Address\Collection" />
+	</type>
+	<!-- Order -->
+	<type name="Magento\Sales\Model\ResourceModel\Order">
+		<plugin name="adfab_gdpr_resource_order" type="Adfab\Gdpr\Model\ResourceModel\Sale" />
+	</type>
+	<type name="Magento\Sales\Model\ResourceModel\Order\Address">
+		<plugin name="adfab_gdpr_resource_order_address" type="Adfab\Gdpr\Model\ResourceModel\Address" />
+	</type>
+	<type name="Magento\Sales\Model\ResourceModel\Order\Collection">
+		<plugin name="adfab_gdpr_resource_order_collection" type="Adfab\Gdpr\Model\ResourceModel\Sale\Collection" />
+	</type>
+	<type name="Magento\Sales\Model\ResourceModel\Order\Address\Collection">
+		<plugin name="adfab_gdpr_resource_order_address_collection" type="Adfab\Gdpr\Model\ResourceModel\Address\Collection" />
+	</type>
+</config>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<section id="customer">
+			<group id="privacy" translate="label" sortOrder="130"
+				showInDefault="1" showInWebsite="0" showInStore="0">
+				<label>Privacy (GDPR)</label>
+				<field id="cipher" translate="label" type="select" sortOrder="0"
+					showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Enable cipher</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="personnalized_suggestions" translate="label" type="select" sortOrder="10"
+					showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Display personnalized suggestions checkbox</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="third_party" translate="label" type="select" sortOrder="20"
+					showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Display 3rd party communication checkbox</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

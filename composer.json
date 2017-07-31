@@ -1,0 +1,21 @@
+{
+    "name": "adfab/module-gdpr",
+    "description": "GDPR compatibility",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adfab Dev Team",
+            "email": "dev@adfab.fr"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Adfab\\Gdpr\\": ""
+        }
+    }
+}
