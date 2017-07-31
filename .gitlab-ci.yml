@@ -1,0 +1,37 @@
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - Build
+  - Test
+  - Deploy
+
+Build:
+  stage: Build
+  script:
+    - bin/decrypt.sh
+    - bin/install.sh
+    - bin/build.sh
+
+Test:
+  stage: Test
+  script:
+    - bin/test.sh
+
+DeployContinuous:
+  stage: Deploy
+  script:
+    - BRANCH=${CI_BUILD_REF_NAME} bin/deploy.sh Continuous
+
+DeployTest:
+  stage: Deploy
+  when: manual
+  script:
+    - BRANCH=${CI_BUILD_REF_NAME} bin/deploy.sh Test
+
+DeployPreproduction:
+  stage: Deploy
+  when: manual
+  script:
+    - BRANCH=${CI_BUILD_REF_NAME} bin/deploy.sh Preproduction
