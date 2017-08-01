@@ -16,13 +16,79 @@ abstract class AbstractPlugin
      *
      * @var array
      */
-    protected $fields = [];
+    protected $fields = [
+        'firstname',
+        'middlename',
+        'lastname',
+        'email',
+        'company',
+        'street',
+        'telephone',
+        'fax',
+        'customer_firstname',
+        'customer_middlename',
+        'customer_lastname',
+        'customer_email',
+        'customer_company',
+        'customer_street',
+        'customer_telephone',
+        'customer_fax',
+        'billing_firstname',
+        'billing_middlename',
+        'billing_lastname',
+        'billing_email',
+        'billing_company',
+        'billing_street',
+        'billing_telephone',
+        'billing_fax',
+        'shipping_firstname',
+        'shipping_middlename',
+        'shipping_lastname',
+        'shipping_email',
+        'shipping_company',
+        'shipping_street',
+        'shipping_telephone',
+        'shipping_fax',
+    ];
 
     /**
      *
-     * @var array
+     * @var string[]
      */
-    protected $formatFields = [];
+    protected $formatFields = [
+        'firstname',
+        'middlename',
+        'lastname',
+        'email',
+        'company',
+        'customer_firstname',
+        'customer_middlename',
+        'customer_lastname',
+        'customer_email',
+        'customer_company',
+        'billing_firstname',
+        'billing_middlename',
+        'billing_lastname',
+        'billing_email',
+        'billing_company',
+        'shipping_firstname',
+        'shipping_middlename',
+        'shipping_lastname',
+        'shipping_email',
+        'shipping_company',
+    ];
+
+    /**
+     *
+     * @var string[]
+     */
+    protected $specialFields = [
+        'name',
+        'billing_name',
+        'billing_full',
+        'shipping_name',
+        'shipping_full',
+    ];
 
     /**
      *
@@ -105,14 +171,17 @@ abstract class AbstractPlugin
     protected function decipher( DataObject $object ) {
         foreach( $object->getData() as $key => & $value ) {
             if ( in_array( $key, $this->fields ) ) {
-                $get = 'get'.ucfirst($key);
-                $set = 'set'.ucfirst($key);
-                if ( false && method_exists( $object, $get ) && method_exists( $object, $set) ) {
-                    $object->$set( $this->cipher->decipher( $object->$get() ) );
+                $object->setData($key, $this->cipher->decipher( $value ) );
+            }
+            else if ( in_array( $key, $this->specialFields ) ) {
+                $parts = explode(' ', $object->getData( $key) );
+                foreach( $parts as & $part ) {
+                    $clear = $this->cipher->decipher($part);
+                    if ( strlen( $clear ) ) {
+                        $part = $clear;
+                    }
                 }
-                else {
-                    $object->setData($key, $this->cipher->decipher( $value ) );
-                }
+                $object->setData($key, implode(' ',$parts) );
             }
         }
         $object->unsetData('is_ciphered');

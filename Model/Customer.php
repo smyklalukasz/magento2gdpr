@@ -5,21 +5,6 @@ use Magento\Customer\Model\Customer as BaseCustomer;
 
 class Customer extends AbstractModelPlugin
 {
-    protected $fields = [
-        'firstname',
-        'middlename',
-        'lastname',
-        'email',
-        'company',
-    ];
-
-    protected $formatFields = [
-        'firstname',
-        'middlename',
-        'lastname',
-        'email',
-        'company',
-    ];
 
     /**
      *

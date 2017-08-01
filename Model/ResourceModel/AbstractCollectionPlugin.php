@@ -8,7 +8,6 @@ use Magento\Framework\DataObject;
 
 abstract class AbstractCollectionPlugin extends AbstractPlugin
 {
-    protected $specialFields = [];
 
     protected $isRunning = false;
 
@@ -25,18 +24,6 @@ abstract class AbstractCollectionPlugin extends AbstractPlugin
         $this->isRunning = true;
         foreach( $collection->getItems() as $item ) {
            $this->decipher($item);
-            foreach( $this->specialFields as $field ) {
-                if ( $item->hasData( $field ) ) {
-                    $parts = explode(' ', $item->getData( $field ) );
-                    foreach( $parts as & $part ) {
-                        $clear = $this->cipher->decipher($part);
-                        if ( strlen( $clear ) ) {
-                            $part = $clear;
-                        }
-                    }
-                    $item->setData( $field, implode(' ',$parts) );
-                }
-            }
         }
         $this->isRunning = false;
         return $result;

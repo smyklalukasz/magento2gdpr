@@ -6,15 +6,4 @@ use Magento\Framework\App\ResourceConnection\SourceProviderInterface;
 use Magento\Framework\DataObject;
 
 class Collection extends AbstractCollectionPlugin {
-
-    protected $fields = [
-        'firstname',
-        'middlename',
-        'lastname',
-        'email',
-        'company',
-        'street',
-        'telephone',
-        'fax',
-    ];
 }

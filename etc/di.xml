@@ -11,6 +11,7 @@
 		<arguments>
 			<argument name="commands" xsi:type="array">
 				<item name="gdpr_crypt" xsi:type="object">Adfab\Gdpr\Console\Command\Crypt</item>
+				<item name="gdpr_decryptstring" xsi:type="object">Adfab\Gdpr\Console\Command\DecryptString</item>
 			</argument>
 		</arguments>
 	</type>
@@ -61,5 +62,8 @@
 	</type>
 	<type name="Magento\Sales\Model\ResourceModel\Order\Address\Collection">
 		<plugin name="adfab_gdpr_resource_order_address_collection" type="Adfab\Gdpr\Model\ResourceModel\Address\Collection" />
+	</type>
+	<type name="Magento\Sales\Model\Order\Address\Validator">
+		<plugin name="adfab_gdpr_order_address_validator" type="Adfab\Gdpr\Model\Address\Validator" />
 	</type>
 </config>

@@ -16,6 +16,7 @@ abstract class AbstractResourcePlugin extends AbstractPlugin
      * @return AbstractModel
      */
     public function aroundSave( AbstractResource $resource, callable $proceed, AbstractModel $object ) {
+        $this->decipher($object);
         $this->formatDataObject($object);
         $this->cipher($object);
         $return = $proceed($object);
