@@ -6,5 +6,5 @@ DIR=`pwd`
 mkdir -p ${DIR}/../build
 php vendor/phpunit/phpunit/phpunit \
 	--configuration dev/tests/unit/phpunit.xml.dist \
-	--log-junit ${DIR}/../build/text.xml \
+	--log-junit ${DIR}/../build/test.xml \
 	app/code/Adfab/Gdpr/Test/Unit/
