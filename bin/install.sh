@@ -23,9 +23,7 @@ do
 done
 cd ${DIR}/web/
 case "${DEPLOY_ENVIRONMENT}" in
-	Continuous)
-	Test)
-	Production)
+	Continuous|Test|Production)
 		;;
 	*)
 		DEPLOY_ENVIRONMENT=Build
