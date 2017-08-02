@@ -7,7 +7,7 @@ if [ -z "${DOMAIN}" ]
 then
 	DOMAIN=`basename ${DIR}`
 fi
-rm -Rf secrets
+rm -Rf secrets secrets.tar.gz
 if [ ! -z "`echo ${DOMAIN} | grep '\.'`" ]
 then
 	curl -s -X BAN -H "Host: ${DOMAIN}" http://localhost/ -o /dev/null
