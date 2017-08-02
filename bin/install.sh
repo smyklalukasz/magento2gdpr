@@ -4,6 +4,10 @@ LOCALDIR=`dirname $0`
 cd ${LOCALDIR}/..
 UNAME=`uname`
 DIR=`pwd`
+if [ -d web ]
+then
+	rm -Rf web
+fi
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition web
 cd web
 composer require \
