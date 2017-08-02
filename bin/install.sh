@@ -22,3 +22,16 @@ do
 	ln -s ../../../../../${FILE}
 done
 cd ${DIR}/web/
+case "${DEPLOY_ENVIRONMENT}" in
+	Continuous)
+	Test)
+	Production)
+		;;
+	*)
+		DEPLOY_ENVIRONMENT=Build
+		;;
+esac
+if [ -d ../secrets/${DEPLOY_ENVIRONMENT} ]
+then
+	rsync -arc ../secrets/${DEPLOY_ENVIRONMENT}/ ./
+fi

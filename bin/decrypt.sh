@@ -11,11 +11,6 @@ then
 	fi
 	ENCRYPTED_IV=`echo ${ENCRYPTED} | sed -e 's/:/ /g' | awk '{print $1}'`
 	ENCRYPTED_KEY=`echo ${ENCRYPTED} | sed -e 's/:/ /g' | awk '{print $2}'`
-	echo "++++++++++++++++++++++++++"
-	echo ${ENCRYPTED_IV}
-	echo "++++++++++++++++++++++++++"
-	echo ${ENCRYPTED_KEY}
-	echo "++++++++++++++++++++++++++"
 	openssl enc -aes-256-cbc -K ${ENCRYPTED_KEY} -iv ${ENCRYPTED_IV} -in ${DIR}/variables.sh.enc -out ${DIR}/variables.sh -d
 	cd ${DIR}/..
 	if [ -f secrets.tar.gz.enc ]
