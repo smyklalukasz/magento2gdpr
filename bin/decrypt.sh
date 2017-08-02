@@ -9,6 +9,9 @@ then
 		echo "You'll find thoses values inside wiki."
 		exit 0
 	fi
+	echo "++++++++++++++++++++++++++"
+	echo ${ENCRYPTED}
+	echo "++++++++++++++++++++++++++"
 	ENCRYPTED_IV=`echo ${ENCRYPTED} | sed -e 's/:/ /g' | awk '{print $1}'`
 	ENCRYPTED_KEY=`echo ${ENCRYPTED} | sed -e 's/:/ /g' | awk '{print $2}'`
 	openssl enc -aes-256-cbc -K ${ENCRYPTED_KEY} -iv ${ENCRYPTED_IV} -in ${DIR}/variables.sh.enc -out ${DIR}/variables.sh -d
