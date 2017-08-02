@@ -45,3 +45,15 @@ then
 		ln -s ${SHARED_DIR}/${FILE} ${FILE}
 	done
 fi
+cd web
+php bin/magento cache:clean
+rm -Rf \
+	pub/static/* \
+	var/cache/* \
+	var/composer_home/* \
+	var/generation/* \
+	var/page_cache/* \
+	var/view_preprocessed/*
+php bin/magento setup:static-content:deploy
+php bin/magento setup:upgrade
+#php bin/magento setup:di:compile

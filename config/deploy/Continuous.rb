@@ -2,7 +2,7 @@ server ENV['DEPLOY_CONTINUOUS_SERVER'], user: ENV['DEPLOY_CONTINUOUS_USER'], rol
 if "#{fetch(:branch)}" == "master"
   set :current_domain, "#{fetch(:application)}." + ENV['DEPLOY_CONTINUOUS_DOMAIN']
 else
-  set :current_domain, "test-#{fetch(:branch)}." + ENV['DEPLOY_CONTINUOUS_DOMAIN']
+  set :current_domain, "#{fetch(:application)}-#{fetch(:branch)}." + ENV['DEPLOY_CONTINUOUS_DOMAIN']
 end
 set :default_domain, "#{fetch(:application)}." + ENV['DEPLOY_CONTINUOUS_DOMAIN']
 set :default_deploy_to, "/var/www/vhosts/#{fetch(:default_domain)}"
