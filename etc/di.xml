@@ -11,6 +11,7 @@
 		<arguments>
 			<argument name="commands" xsi:type="array">
 				<item name="gdpr_crypt" xsi:type="object">Adfab\Gdpr\Console\Command\Crypt</item>
+				<item name="gdpr_cryptstring" xsi:type="object">Adfab\Gdpr\Console\Command\CryptString</item>
 				<item name="gdpr_decryptstring" xsi:type="object">Adfab\Gdpr\Console\Command\DecryptString</item>
 			</argument>
 		</arguments>

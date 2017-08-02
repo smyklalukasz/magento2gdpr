@@ -57,7 +57,7 @@ class Cipher extends AbstractHelper
     }
 
     /**
-     * @return string
+     * @return array
      */
     private function getKeyAndIv() {
         if ( isset( $this->keyAndIv) ) {
@@ -73,6 +73,18 @@ class Cipher extends AbstractHelper
         }
         $this->keyAndIv= include( $file );
         return $this->keyAndIv;
+    }
+
+    /**
+     *
+     * @param string $key
+     * @param string $iv
+     */
+    public function setKeyAndIv($key,$iv) {
+        $this->keyAndIv = [
+            'key' => (string) $key,
+            'iv' => (string) $iv,
+        ];
     }
 
     /**

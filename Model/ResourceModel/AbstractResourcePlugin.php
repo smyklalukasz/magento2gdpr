@@ -17,7 +17,12 @@ abstract class AbstractResourcePlugin extends AbstractPlugin
      */
     public function aroundSave( AbstractResource $resource, callable $proceed, AbstractModel $object ) {
         $this->decipher($object);
-        $this->formatDataObject($object);
+        if (
+            ( $object instanceof \Magento\Customer\Model\Customer ) ||
+            ( $object instanceof \Magento\Customer\Model\Address )
+        ) {
+            $this->formatDataObject($object);
+        }
         $this->cipher($object);
         $return = $proceed($object);
         $this->decipher($object);
