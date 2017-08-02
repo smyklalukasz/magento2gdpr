@@ -21,7 +21,7 @@ for FILE in `ls ../../../../../ | grep -v web`
 do
 	ln -s ../../../../../${FILE}
 done
-cd ${DIR}/web/
+cd ${DIR}
 case "${DEPLOY_ENVIRONMENT}" in
 	Continuous|Test|Production)
 		;;
@@ -29,7 +29,19 @@ case "${DEPLOY_ENVIRONMENT}" in
 		DEPLOY_ENVIRONMENT=Build
 		;;
 esac
-if [ -d ../secrets/${DEPLOY_ENVIRONMENT} ]
+if [ -d secrets/${DEPLOY_ENVIRONMENT} ]
 then
-	rsync -arc ../secrets/${DEPLOY_ENVIRONMENT}/ ./
+	rsync -arc secrets/${DEPLOY_ENVIRONMENT}/ web/
+fi
+if [ ! -z "${SHARED_DIR}" ]
+then
+	for FILE in web/pub/media web/pub/static web/var
+	do
+		mkdir -p ${SHARED_DIR}/${FILE}
+		if [ -e ${FILE} ]
+		then
+			rm -Rf ${FILE}
+		fi
+		ln -s ${SHARED_DIR}/${FILE} ${FILE}
+	done
 fi
