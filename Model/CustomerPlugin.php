@@ -1,18 +1,17 @@
 <?php
 namespace Adfab\Gdpr\Model;
 
-use Magento\Customer\Model\Customer as BaseCustomer;
+use Magento\Customer\Model\Customer;
 
-class Customer extends AbstractModelPlugin
+class CustomerPlugin extends ModelPlugin
 {
-
     /**
      *
-     * @param BaseCustomer $customer
+     * @param Customer $customer
      * @param string $email
      * @return string[]
      */
-    public function beforeLoadByEmail(BaseCustomer $customer, $email)
+    public function beforeLoadByEmail(Customer $customer, $email)
     {
         if (in_array('email', $this->fields)) {
             return [

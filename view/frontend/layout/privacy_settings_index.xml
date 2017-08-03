@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<update handle="customer_account" />
+	<body>
+		<referenceContainer name="content">
+			<block class="Adfab\Gdpr\Block\Settings" name="privacy_settings"
+				cacheable="false">
+				<block class="Adfab\Gdpr\Block\Form\Optin" name="privacy.settings.optin"
+				template="gdpr/account/optin.phtml" before="-" />
+				<container name="privacy.settings.form.before" as="form_before"
+					label="Privacy settings Form Before" htmlTag="div"
+					htmlClass="rewards" />
+			</block>
+		</referenceContainer>
+	</body>
+</page>

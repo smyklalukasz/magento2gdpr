@@ -2,18 +2,12 @@
 
 namespace Adfab\Gdpr\Setup;
 
-use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 
 class InstallSchema implements InstallSchemaInterface
 {
-    /**
-     * @var EavSetupFactory
-     */
-    protected $eavSetupFactory;
-
 
     /**
      * tables and columns to alter
@@ -39,16 +33,6 @@ class InstallSchema implements InstallSchemaInterface
     ];
 
     /**
-     * UpgradeData constructor
-     *
-     * @param EavSetupFactory $eavSetupFactory
-     */
-    public function __construct(EavSetupFactory $eavSetupFactory)
-    {
-        $this->eavSetupFactory = $eavSetupFactory;
-    }
-
-    /**
      *
      * {@inheritDoc}
      * @see \Magento\Framework\Setup\InstallSchemaInterface::install()
@@ -56,10 +40,6 @@ class InstallSchema implements InstallSchemaInterface
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
         $setup->startSetup();
-
-        //$eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
-        /* @var $eavSetup \Magento\Eav\Setup\EavSetup */
-
         foreach( $this->tables as $table => $columns ) {
             $tableName = $setup->getTable($table);
             foreach( $columns as $column ) {

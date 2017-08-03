@@ -1,0 +1,30 @@
+<?php
+/**
+ * Customer "Optin" template
+ *
+ * @var $block \Adfab\Gdpr\Block\Form\Optin
+ */
+if ( $this->displayPersonnalizedSuggestions() ) { ?>
+<div id="gdpr-personnalized-suggestions-box" class="field choice gdpr">
+    <input type="checkbox" name="personnalized_suggestions" class="checkbox" id="account-form-personnalized-suggestions" class="input-text" data-validate="{required:false}" value="1" title="<?php /* @escapeNotVerified */ echo __('Accept user personnalization') ?>" <?php if ( $this->getPersonnalizedSuggestions() ) { ?>checked="checked" <?php } ?>/>
+    <label for="account-form-personnalized-suggestions" class="label"><span><?php /* @escapeNotVerified */ echo __('Accept user personnalization') ?></span></label>
+    <span class="tooltip wrapper">
+        <a class="link tooltip toggle" href="#"><?php /* @escapeNotVerified */ echo __('What\'s this?') ?></a>
+        <span class="tooltip content">
+            <?php echo /* @escapeNotVerified */ __('Check this to access personnalized search result and suggestions based on your own history.')?>
+        </span>
+    </span>
+</div>
+<?php }
+if ( $this->displayThirdParty() ) { ?>
+<div id="gdpr-third-party-box" class="field choice gdpr">
+    <input type="checkbox" name="third_party" class="checkbox" id="account-form-third-party" data-validate="{required:false}" value="1" title="<?php /* @escapeNotVerified */ echo __('Accept third party transmission') ?>" <?php if ( $this->getThirdParty() ) { ?>checked="checked" <?php } ?>/>
+    <label for="account-form-third-party" class="label"><span><?php /* @escapeNotVerified */ echo __('Accept third party transmission') ?></span></label>
+    <span class="tooltip wrapper">
+        <a class="link tooltip toggle" href="#"><?php /* @escapeNotVerified */ echo __('What\'s this?') ?></a>
+        <span class="tooltip content">
+            <?php echo /* @escapeNotVerified */ __('Check this to accept third party transmission.')?>
+        </span>
+    </span>
+</div>
+<?php }

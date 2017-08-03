@@ -5,7 +5,7 @@ use Adfab\Gdpr\Helper\Cipher;
 use Magento\Framework\DataObject;
 use Magento\Framework\Model\AbstractModel;
 
-abstract class AbstractModelPlugin extends AbstractPlugin
+class ModelPlugin extends AbstractPlugin
 {
 
     /**

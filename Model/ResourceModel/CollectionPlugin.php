@@ -6,7 +6,7 @@ use Adfab\Gdpr\Model\AbstractPlugin;
 use Magento\Framework\App\ResourceConnection\SourceProviderInterface;
 use Magento\Framework\DataObject;
 
-abstract class AbstractCollectionPlugin extends AbstractPlugin
+class CollectionPlugin extends AbstractPlugin
 {
 
     protected $isRunning = false;

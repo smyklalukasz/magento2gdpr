@@ -3,6 +3,8 @@
 namespace Adfab\Gdpr\Setup;
 
 use Adfab\Gdpr\Helper\Cipher;
+use Magento\Eav\Model\Config;
+use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\App\Cache\TypeListInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Config\Storage\WriterInterface;
@@ -38,23 +40,48 @@ class InstallData implements InstallDataInterface
     protected $cacheTypeList;
 
     /**
+     * @var EavSetupFactory
+     */
+    protected $eavSetupFactory;
+
+    /**
+     *
+     * @var Config
+     */
+    protected $eavConfig;
+
+    /**
+     *
+     * @var array
+     */
+    protected $customerFields = [
+        'personnalized_suggestions' => 'Personnalized suggestions',
+        'third_party' => 'Third party',
+    ];
+
+    /**
      * Initialize dependencies.
      *
      * @param ScopeConfigInterface $scopeConfig
      * @param WriterInterface $configWriter
      * @param TypeListInterface $cacheTypeList
      * @param DirectoryList $directoryList
+     * @param EavSetupFactory $eavSetupFactory
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         WriterInterface $configWriter,
         TypeListInterface $cacheTypeList,
-        DirectoryList $directoryList
+        DirectoryList $directoryList,
+        EavSetupFactory $eavSetupFactory,
+        Config $eavConfig
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->configWriter= $configWriter;
         $this->cacheTypeList = $cacheTypeList;
         $this->directoryList= $directoryList;
+        $this->eavSetupFactory = $eavSetupFactory;
+        $this->eavConfig = $eavConfig;
     }
 
     /**
@@ -95,6 +122,34 @@ class InstallData implements InstallDataInterface
             }
             file_put_contents( $file, '<?php return [\'key\'=>\''.md5($password).'\', \'iv\'=>\''.strtr($iv,['\''=>'\\\'']).'\'];' );
             chmod($file, 0700);
+        }
+        $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
+        /* @var $eavSetup \Magento\Eav\Setup\EavSetup */
+        foreach( $this->customerFields as $field => $label ) {
+            $eavSetup->addAttribute(
+                \Magento\Customer\Model\Customer::ENTITY,
+                $field,
+                [
+                    'label' => $label,
+                    'default' => 0,
+                    'group' => 'Privacy',
+                    'input' => 'boolean',
+                    'position' => 200,
+                    'required' => false,
+                    'sort_order' => 200,
+                    'source' => 'Magento\Eav\Model\Entity\Attribute\Source\Boolean',
+                    'system' => false,
+                    'used_in_forms', ['adminhtml_customer', 'customer_account_create'],
+                    'tab_group_code' => 'privacy',
+                    'type' => 'int',
+                ]
+            );
+            $attribute = $this->eavConfig->getAttribute(\Magento\Customer\Model\Customer::ENTITY, $field);
+            $attribute->setData(
+                'used_in_forms',
+                ['adminhtml_customer', 'checkout_register', 'customer_account_create']
+            );
+            $attribute->save();
         }
         $setup->endSetup();
     }

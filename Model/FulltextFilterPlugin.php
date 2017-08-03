@@ -6,17 +6,8 @@ use Magento\Framework\Data\Collection;
 use Magento\Framework\View\Element\UiComponent\DataProvider\FilterApplierInterface;
 use Adfab\Gdpr\Helper\Cipher;
 
-class FulltextFilter extends AbstractPlugin
+class FulltextFilterPlugin extends AbstractPlugin
 {
-    protected $fields = [
-        'firstname',
-        'middlename',
-        'lastname',
-        'email',
-        'company',
-    ];
-
-    protected $currentObjects = [];
 
     /**
      *

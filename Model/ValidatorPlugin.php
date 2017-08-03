@@ -1,10 +1,41 @@
 <?php
 namespace Adfab\Gdpr\Model;
 
+use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Validator\AbstractValidator;
+use Magento\Sales\Model\Order\Address\Validator as OrderAddressValidator;
 
-abstract class AbstractValidatorPlugin extends AbstractPlugin
+class ValidatorPlugin extends AbstractPlugin
 {
+    /**
+     *
+     * @param AbstractValidator $validator
+     * @param callable $proceed
+     * @param AbstractModel $value
+     * @return unknown
+     */
+    public function aroundIsValid( AbstractValidator $validator, callable $proceed, $value ) {
+        return $this->processValidation($validator, $proceed, $value);
+    }
+
+    /**
+     *
+     * @param OrderAddressValidator $validator
+     * @param callable $proceed
+     * @param AbstractModel $value
+     * @return unknown
+     */
+    public function aroundValidate( OrderAddressValidator $validator, callable $proceed, AbstractModel $value ) {
+        return $this->processValidation($validator, $proceed, $value);
+    }
+
+    /**
+     *
+     * @param OrderAddressValidator|AbstractValidator $validator
+     * @param callable $proceed
+     * @param unknown $value
+     * @return unknown
+     */
     protected function processValidation( $validator, callable $proceed, $value ) {
         $objectsToProcess = [];
         if (

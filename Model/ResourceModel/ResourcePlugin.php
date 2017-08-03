@@ -7,7 +7,7 @@ use Magento\Framework\DataObject;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\ResourceModel\AbstractResource;
 
-abstract class AbstractResourcePlugin extends AbstractPlugin
+class ResourcePlugin extends AbstractPlugin
 {
     /**
      *
@@ -40,6 +40,52 @@ abstract class AbstractResourcePlugin extends AbstractPlugin
      */
     public function aroundLoad( AbstractResource $resource, callable $proceed, AbstractModel $object, $value, $field = null) {
         $return = $proceed($object, $value, $field);
+        $this->decipher($object);
+        return $return;
+    }
+
+
+    /**
+     *
+     * @param AbstractResource $resource
+     * @param callable $proceed
+     * @param unknown $object
+     * @param unknown $customerId
+     * @return unknown
+     */
+    public function aroundLoadByCustomerId(AbstractResource $resource, callable $proceed, $object, $customerId)
+    {
+        $return = $proceed($object, $customerId);
+        $this->decipher($object);
+        return $return;
+    }
+
+    /**
+     *
+     * @param AbstractResource $resource
+     * @param callable $proceed
+     * @param unknown $object
+     * @param unknown $quoteId
+     * @return unknown
+     */
+    public function aroundLoadActive(AbstractResource $resource, callable $proceed, $object, $quoteId)
+    {
+        $return = $proceed($object, $quoteId);
+        $this->decipher($object);
+        return $return;
+    }
+
+    /**
+     *
+     * @param AbstractResource $resource
+     * @param callable $proceed
+     * @param unknown $object
+     * @param unknown $quoteId
+     * @return unknown
+     */
+    public function aroundLoadByIdWithoutStore(AbstractResource $resource, callable $proceed, $object, $quoteId)
+    {
+        $return = $proceed($object, $quoteId);
         $this->decipher($object);
         return $return;
     }

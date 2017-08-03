@@ -27,6 +27,12 @@ class Cipher extends AbstractHelper
      *
      * @var boolean
      */
+    protected $cipherActive;
+
+    /**
+     *
+     * @var boolean
+     */
     protected $isIndexing = false;
 
     /**
@@ -54,6 +60,17 @@ class Cipher extends AbstractHelper
     ) {
         parent::__construct($context);
         $this->directoryList= $directoryList;
+    }
+
+    /**
+     *
+     * @return boolean
+     */
+    public function isActive() {
+        if ( ! isset( $this->cipherActive ) ) {
+            $this->cipherActive = $this->scopeConfig->getValue(self::XML_PATH_CUSTOMER_CIPHER_ACTIVE) ? true : false;
+        }
+        return $this->cipherActive;
     }
 
     /**
@@ -93,7 +110,7 @@ class Cipher extends AbstractHelper
      * @return string
      */
     public function cipher( $string ) {
-        if ( ( $string === null ) || ! is_string( $string ) ) {
+        if ( ( $string === null ) || ! is_string( $string ) || ! $this->isActive() ) {
             return $string;
         }
         $keyAndIv = $this->getKeyAndIv();

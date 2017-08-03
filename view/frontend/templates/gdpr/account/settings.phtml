@@ -1,0 +1,37 @@
+<?php if ( $this->displayPersonnalizedSuggestions() || $this->displayThirdParty() ) { ?>
+<?php echo $block->getChildHtml('form_before')?>
+<form class="block block-dashboard-info form privacy-settings" action="<?php /* @escapeNotVerified */ echo $block->getAction() ?>" method="post" id="form-validate">
+    <fieldset class="fieldset">
+        <?php echo $block->getBlockHtml('formkey')?>
+        <legend class="legend"><span><?php /* @escapeNotVerified */ echo __('Choose your settings') ?></span></legend>
+        <?php echo $this->getChildHtml('privacy.settings.optin') ?>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary"><button type="submit" title="<?php /* @escapeNotVerified */ echo __('Save') ?>" class="action save primary"><span><?php /* @escapeNotVerified */ echo __('Save') ?></span></button></div>
+    </div>
+</form>
+<?php }
+if ( $this->displayExport() ) { ?>
+<div class="block block-dashboard-info">
+    <div class="block-title"><strong><?php /* @escapeNotVerified */ echo __('Export your personnal data') ?></strong></div>
+    <div class="block-content">
+        <div class="box-actions">
+            <a class="action edit" href="<?php echo $this->getUrl('privacy/export/') ?>">
+                <span><?php /* @escapeNotVerified */ echo __('Export'); ?></span>
+            </a>
+        </div>
+    </div>
+</div>
+<?php }
+if ( $this->displayAccountDeletion() ) { ?>
+<div class="block block-dashboard-info ">
+    <div class="block-title"><strong><?php /* @escapeNotVerified */ echo __('Danger zone: account deletion') ?></strong></div>
+    <div class="block-content">
+        <div class="box-actions">
+            <a class="action edit" href="<?php echo  $this->getUrl('privacy/delete/') ?>">
+                <span><?php /* @escapeNotVerified */ echo __('Delete my account'); ?></span>
+            </a>
+        </div>
+    </div>
+</div>
+<?php }
