@@ -102,6 +102,7 @@ class Cipher extends AbstractHelper
             'key' => (string) $key,
             'iv' => (string) $iv,
         ];
+        $this->cipherActive = true;
     }
 
     /**
