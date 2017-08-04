@@ -1,5 +1,5 @@
 {
-    "name": "adfab/module-gdpr",
+    "name": "adfab/m2-module-gdpr",
     "description": "GDPR compatibility",
     "license": "MIT",
     "authors": [
@@ -10,9 +10,11 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "magento/module-customer": "100.1.*",
-        "magento/module-quote": "100.1.*",
-        "magento/module-sales": "100.1.*"
+        "fzaninotto/faker": "*",
+        "magento/module-customer": "100.*",
+        "magento/module-quote": "100.*",
+        "magento/module-sales": "100.*",
+        "sabas/edifact": "*"
     },
     "autoload": {
         "files": [

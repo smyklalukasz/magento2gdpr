@@ -8,6 +8,7 @@
 				<cipher_filename></cipher_filename>
 				<personnalized_suggestions>1</personnalized_suggestions>
 				<third_party>1</third_party>
+				<use_pseudo>1</use_pseudo>
 				<export>1</export>
 				<account_deletion>1</account_deletion>
 			</privacy>

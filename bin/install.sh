@@ -11,10 +11,12 @@ fi
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition web
 cd web
 composer require \
+	fzaninotto/faker \
 	magento/module-catalog-sample-data \
 	magento/module-configurable-sample-data \
 	magento/module-cms-sample-data \
-	magento/module-sales-sample-data
+	magento/module-sales-sample-data \
+	sabas/edifact
 mkdir -p app/code/Adfab/Gdpr
 cd app/code/Adfab/Gdpr
 for FILE in `ls ../../../../../ | grep -v web`
