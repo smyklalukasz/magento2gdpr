@@ -39,6 +39,16 @@ if [ -d secrets/${DEPLOY_ENVIRONMENT} ]
 then
 	rsync -arc secrets/${DEPLOY_ENVIRONMENT}/ web/
 fi
+if [ "${TRAVIS}" == "true" ]
+then
+	DATABASE_NAME=$(grep "'dbname'" web/app/etc/env.php | sed -e "s/'/ /g" | awk '{print $3}')
+	DATABASE_USER=$(grep "'username'" web/app/etc/env.php | sed -e "s/'/ /g" | awk '{print $3}')
+	DATABASE_PASSWORD=$(grep "'password'" web/app/etc/env.php | sed -e "s/'/ /g" | awk '{print $3}')
+	echo "CREATE USER '${DATABASE_USER}'@'localhost' IDENTIFIED BY '${DATABASE_PASSWORD}';
+GRANT USAGE ON *.* TO '${DATABASE_USER}'@'localhost' IDENTIFIED BY '${DATABASE_PASSWORD}' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
+CREATE DATABASE IF NOT EXISTS \`${DATABASE_NAME}\` ;
+GRANT ALL PRIVILEGES ON \`${DATABASE_NAME}\`.* TO '${DATABASE_USER}'@'localhost' ;" | mysql -f
+fi
 if [ ! -z "${SHARED_DIR}" ]
 then
 	for FILE in web/pub/media web/pub/static web/var
