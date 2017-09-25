@@ -10,8 +10,7 @@ then
 fi
 if ! composer config http-basic.repo.magento.com.username
 then
-	composer config http-basic.repo.magento.com.username "${MAGENTO_PACKAGIST_BASIC_AUTH_USERNAME}"
-	composer config http-basic.repo.magento.com.password "${MAGENTO_PACKAGIST_BASIC_AUTH_PASSWORD}"
+	composer config --global http-basic.repo.magento.com "${MAGENTO_PACKAGIST_BASIC_AUTH_USERNAME}" "${MAGENTO_PACKAGIST_BASIC_AUTH_PASSWORD}"
 fi
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition web
 cd web
