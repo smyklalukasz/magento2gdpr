@@ -49,7 +49,7 @@ GRANT USAGE ON *.* TO '${DATABASE_USER}'@'localhost' IDENTIFIED BY '${DATABASE_P
 CREATE DATABASE IF NOT EXISTS \`${DATABASE_NAME}\` ;
 GRANT ALL PRIVILEGES ON \`${DATABASE_NAME}\`.* TO '${DATABASE_USER}'@'localhost' ;" | mysql -f
 	cd web
-	bin/magento help setup:install \
+	php bin/magento setup:install \
 		--db-host=localhost \
 		--db-name="${DATABASE_NAME}" \
 		--db-user="${DATABASE_USER}" \
