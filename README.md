@@ -4,6 +4,10 @@ This module provides UE GPDR compliance inside Magento2
 
 See [this article](https://connect.adfab.fr/dev/le-rgpd-gdpr-c-est-maintenant-pour-les-e-commercants) (in french)
 
+[![Build Status](https://travis-ci.org/AdFabConnect/magento2gdpr.svg?branch=master)](https://travis-ci.org/AdFabConnect/magento2gdpr)
+[![Coverage Status](https://coveralls.io/repos/github/AdFabConnect/magento2gdpr/badge.svg?branch=develop)](https://coveralls.io/github/AdFabConnect/magento2gdpr?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AdFabConnect/magento2gdpr/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/AdFabConnect/magento2gdpr/?branch=master)
+
 ## Disclaimer / Licence
 
 See [license](https://github.com/AdFabConnect/magento2gdpr/blob/master/LICENSE)

@@ -1,4 +1,8 @@
-language: shell
+language: php
+php:
+- '7.0'
+services:
+- mysql
 cache:
   directories: ~
 before_install:
