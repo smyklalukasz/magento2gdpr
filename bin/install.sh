@@ -23,7 +23,7 @@ composer require \
 	sabas/edifact
 mkdir -p app/code/Adfab/Gdpr
 cd app/code/Adfab/Gdpr
-for FILE in `ls ../../../../../ | grep -v web`
+for FILE in `ls ../../../../../ | grep -v web | grep -v config`
 do
 	ln -s ../../../../../${FILE}
 done
