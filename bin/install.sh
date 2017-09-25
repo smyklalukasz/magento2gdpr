@@ -48,6 +48,7 @@ then
 GRANT USAGE ON *.* TO '${DATABASE_USER}'@'localhost' IDENTIFIED BY '${DATABASE_PASSWORD}' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
 CREATE DATABASE IF NOT EXISTS \`${DATABASE_NAME}\` ;
 GRANT ALL PRIVILEGES ON \`${DATABASE_NAME}\`.* TO '${DATABASE_USER}'@'localhost' ;" | mysql -f
+	cd web
 	bin/magento help setup:install \
 		--db-host=localhost \
 		--db-name="${DATABASE_NAME}" \
@@ -65,6 +66,7 @@ GRANT ALL PRIVILEGES ON \`${DATABASE_NAME}\`.* TO '${DATABASE_USER}'@'localhost'
 		--admin-lastname=Adfab \
 		--cleanup-database \
 		--use-sample-data
+	cd ..
 fi
 if [ ! -z "${SHARED_DIR}" ]
 then
