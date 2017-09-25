@@ -10,6 +10,6 @@ set :use_sudo, false
 
 namespace :deploy do
   before :starting, :preparehosting
-  before :publishing, :install
+  after :updating, :install
   before :finishing, :clean
 end
