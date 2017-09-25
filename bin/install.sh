@@ -55,8 +55,8 @@ GRANT ALL PRIVILEGES ON \`${DATABASE_NAME}\`.* TO '${DATABASE_USER}'@'localhost'
 		--db-user="${DATABASE_USER}" \
 		--db-password="${DATABASE_PASSWORD}" \
 		--base-url=http://localhost \
-		--base-url-secure=http://localhost \
-		--language=fr \
+		--base-url-secure=https://localhost \
+		--language=fr_FR \
 		--timezone=Europe/Paris \
 		--currency=EUR \
 		--admin-user=admin \
