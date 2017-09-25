@@ -44,3 +44,5 @@ Thumbs.db
 /bin/variables.sh
 /secrets/*
 !/secrets/.gitkeep
+/build
+/web

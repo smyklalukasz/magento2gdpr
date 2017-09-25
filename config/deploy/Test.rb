@@ -1,3 +1,4 @@
+set :stage, :Test
 server ENV['DEPLOY_TEST_SERVER'], user: ENV['DEPLOY_TEST_USER'], roles: %w{app db web}
 if "#{fetch(:branch)}" == "master"
   set :current_domain, "#{fetch(:application)}." + ENV['DEPLOY_TEST_DOMAIN']
