@@ -91,6 +91,7 @@ abstract class AbstractPlugin
         'shipping_full',
         'shipping_address',
         'customer_name',
+        'customer',
     ];
 
     /**
