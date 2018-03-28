@@ -67,6 +67,30 @@
 	<type name="Magento\Sales\Model\Order\Address\Validator">
 		<plugin name="adfab_gdpr_order_address_validator" type="Adfab\Gdpr\Model\ValidatorPlugin" />
 	</type>
+	<type name="Magento\Sales\Model\ResourceModel\Order\Customer\Collection">
+		<plugin name="adfab_gdpr_resource_order_customer_collection" type="Adfab\Gdpr\Model\ResourceModel\CollectionPlugin" />
+	</type>
+	<type name="Magento\Sales\Model\ResourceModel\Order\Grid\Collection">
+		<plugin name="adfab_gdpr_resource_order_grid_collection" type="Adfab\Gdpr\Model\ResourceModel\CollectionPlugin" />
+	</type>
+	<type name="Magento\Sales\Model\ResourceModel\Order\Invoice\Grid\Collection">
+		<plugin name="adfab_gdpr_resource_order_invoice_grid_collection" type="Adfab\Gdpr\Model\ResourceModel\CollectionPlugin" />
+	</type>
+	<type name="Magento\Sales\Model\ResourceModel\Order\Shipment\Grid\Collection">
+		<plugin name="adfab_gdpr_resource_order_shipment_grid_collection" type="Adfab\Gdpr\Model\ResourceModel\CollectionPlugin" />
+	</type>
+	<type name="Magento\Sales\Model\ResourceModel\Order\Creditmemo\Grid\Collection">
+		<plugin name="adfab_gdpr_resource_order_creditmemo_grid_collection" type="Adfab\Gdpr\Model\ResourceModel\CollectionPlugin" />
+	</type>
+	<type name="Magento\Sales\Model\ResourceModel\Order\Invoice\Orders\Grid\Collection">
+		<plugin name="adfab_gdpr_resource_order_invoice_orders_grid_collection" type="Adfab\Gdpr\Model\ResourceModel\CollectionPlugin" />
+	</type>
+	<type name="Magento\Sales\Model\ResourceModel\Order\Shipment\Order\Grid\Collection">
+		<plugin name="adfab_gdpr_resource_order_shipment_order_grid_collection" type="Adfab\Gdpr\Model\ResourceModel\CollectionPlugin" />
+	</type>
+	<type name="Magento\Sales\Model\ResourceModel\Order\Creditmemo\Order\Grid\Collection">
+		<plugin name="adfab_gdpr_resource_order_creditmemo_order_grid_collection" type="Adfab\Gdpr\Model\ResourceModel\CollectionPlugin" />
+	</type>
 	<!-- Review -->
 	<type name="Magento\Review\Model\Review">
 		<plugin name="adfab_gdpr_review" type="Adfab\Gdpr\Model\ReviewPlugin" />
