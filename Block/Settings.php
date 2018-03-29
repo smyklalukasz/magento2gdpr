@@ -102,7 +102,7 @@ class Settings extends \Magento\Customer\Block\Account\Dashboard
      * @return boolean
      */
     public function displayThirdParty() {
-        return $this->helper->getPersonnalizedSuggestionsActive();
+        return $this->helper->getThirdPartyActive();
     }
 
     /**
