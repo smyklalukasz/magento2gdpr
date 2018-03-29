@@ -1,7 +1,7 @@
 <?php
 namespace Adfab\Gdpr\Test\Unit;
 
-class CipherTest extends \PHPUnit_Framework_TestCase
+class CipherTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var \Adfab\Gdpr\Helper\Cipher
