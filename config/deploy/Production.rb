@@ -1,4 +1,3 @@
-set :stage, :Production
 server ENV['DEPLOY_PRODUCTION_SERVER'], user: ENV['DEPLOY_PRODUCTION_USER'], roles: %w{app db web}
 set :current_domain, ENV['DEPLOY_PRODUCTION_DOMAIN']
 set :default_domain, ENV['DEPLOY_PRODUCTION_DOMAIN']
