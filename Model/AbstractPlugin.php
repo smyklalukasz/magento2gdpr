@@ -86,8 +86,12 @@ abstract class AbstractPlugin
         'name',
         'billing_name',
         'billing_full',
+        'billing_address',
         'shipping_name',
         'shipping_full',
+        'shipping_address',
+        'customer_name',
+        'customer',
     ];
 
     /**
