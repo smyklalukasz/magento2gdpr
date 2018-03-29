@@ -39,7 +39,7 @@ PHP=php
 PHPVERSION=$(php -v | grep -E '^PHP [0-9]+\.[0-9]+' | sed -E 's/PHP ([0-9]+)\.([0-9]+).*/\1.\2/g')
 PHPMAJOR=$(echo ${PHPVERSION} | sed -E 's/\.[0-9]+//g')
 PHPMINOR=$(echo ${PHPVERSION} | sed -E 's/[0-9]+\.//g')
-if [ "${PHPMAJOR}" -lt 7 -o "${PHPMINOR}" -gt 0 ]
+if [ "${PHPMAJOR}" -lt 7 -o "${PHPMINOR}" -gt 0 ] && command -v php7.0
 then
         PHP=php7.0
 fi
