@@ -1,5 +1,3 @@
 #!/bin/bash
-LOCALDIR=`dirname $0`
-. ${LOCALDIR}/common.sh
-cd ${LOCALDIR}/..
+. "$(dirname "$0")/common.sh"
 bin/decrypt.sh

@@ -1,8 +1,5 @@
 #!/bin/bash
-LOCALDIR=`dirname $0`
-. ${LOCALDIR}/common.sh
-cd ${LOCALDIR}/../web
-DIR=`pwd`
+. "$(dirname "$0")/common.sh"
 mkdir -p ${DIR}/../build
 php vendor/phpunit/phpunit/phpunit \
 	--configuration dev/tests/unit/phpunit.xml.dist \

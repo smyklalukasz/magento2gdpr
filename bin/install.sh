@@ -1,9 +1,5 @@
 #!/bin/bash
-LOCALDIR=`dirname $0`
-. ${LOCALDIR}/common.sh
-cd ${LOCALDIR}/..
-UNAME=`uname`
-DIR=`pwd`
+. "$(dirname "$0")/common.sh"
 if [ -d web ]
 then
 	rm -Rf web
@@ -23,7 +19,7 @@ composer require \
 	sabas/edifact
 mkdir -p app/code/Adfab/Gdpr
 cd app/code/Adfab/Gdpr
-for FILE in `ls ../../../../../ | grep -v web | grep -v config`
+for FILE in $(ls ../../../../../ | grep -v web | grep -v config)
 do
 	ln -s ../../../../../${FILE}
 done
