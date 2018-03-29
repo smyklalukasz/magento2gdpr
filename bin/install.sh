@@ -35,6 +35,14 @@ if [ -d secrets/${DEPLOY_ENVIRONMENT} ]
 then
 	rsync -arc secrets/${DEPLOY_ENVIRONMENT}/ web/
 fi
+PHP=php
+PHPVERSION=$(php -v | grep -E '^PHP [0-9]+\.[0-9]+' | sed -E 's/PHP ([0-9]+)\.([0-9]+).*/\1.\2/g')
+PHPMAJOR=$(echo ${PHPVERSION} | sed -E 's/\.[0-9]+//g')
+PHPMINOR=$(echo ${PHPVERSION} | sed -E 's/[0-9]+\.//g')
+if [ "${PHPMAJOR}" -lt 7 -o "${PHPMINOR}" -gt 1 ]
+then
+        PHP=php7.1
+fi
 if [ "${TRAVIS}" == "true" ]
 then
 	DATABASE_NAME=$(grep "'dbname'" web/app/etc/env.php | sed -e "s/'/ /g" | awk '{print $3}')
@@ -45,7 +53,7 @@ GRANT USAGE ON *.* TO '${DATABASE_USER}'@'localhost' IDENTIFIED BY '${DATABASE_P
 CREATE DATABASE IF NOT EXISTS \`${DATABASE_NAME}\` ;
 GRANT ALL PRIVILEGES ON \`${DATABASE_NAME}\`.* TO '${DATABASE_USER}'@'localhost' ;" | mysql -f
 	cd web
-	php bin/magento setup:install \
+	${PHP} bin/magento setup:install \
 		--db-host=localhost \
 		--db-name="${DATABASE_NAME}" \
 		--db-user="${DATABASE_USER}" \
@@ -77,7 +85,7 @@ then
 	done
 fi
 cd web
-php bin/magento cache:clean
+${PHP} bin/magento cache:clean
 rm -Rf \
 	pub/static/* \
 	var/cache/* \
@@ -85,6 +93,6 @@ rm -Rf \
 	var/generation/* \
 	var/page_cache/* \
 	var/view_preprocessed/*
-php bin/magento setup:static-content:deploy
-php bin/magento setup:upgrade
-#php bin/magento setup:di:compile
+${PHP} bin/magento setup:static-content:deploy -f
+${PHP} bin/magento setup:upgrade
+#${PHP} bin/magento setup:di:compile
