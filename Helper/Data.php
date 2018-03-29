@@ -50,7 +50,7 @@ class Data extends AbstractHelper
     public function getThirdPartyActive()
     {
         if ( ! isset( $this->thirdPartyActive) ) {
-            $this->thirdPartyActive = $this->scopeConfig->getValue(self::XML_PATH_CUSTOMER_PERSONNALIZED_SUGGESTIONS) ? true : false;
+            $this->thirdPartyActive = $this->scopeConfig->getValue(self::XML_PATH_CUSTOMER_THIRD_PARTY) ? true : false;
         }
         return $this->thirdPartyActive;
     }
@@ -62,7 +62,7 @@ class Data extends AbstractHelper
     public function getPersonnalizedSuggestionsActive()
     {
         if ( ! isset( $this->personnalizedSuggestionsActive) ) {
-            $this->personnalizedSuggestionsActive = $this->scopeConfig->getValue(self::XML_PATH_CUSTOMER_THIRD_PARTY) ? true : false;
+            $this->personnalizedSuggestionsActive = $this->scopeConfig->getValue(self::XML_PATH_CUSTOMER_PERSONNALIZED_SUGGESTIONS) ? true : false;
         }
         return $this->personnalizedSuggestionsActive;
     }
