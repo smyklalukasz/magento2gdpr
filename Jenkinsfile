@@ -47,7 +47,7 @@ pipeline {
     }
     post {
         changed {
-            slackSend  channel: '#devops', color: ( currentBuild.result != null ? '#d00000' : '#36a64f' ), message: "${env.JOB_NAME} - #${env.BUILD_NUMBER} " + ( currentBuild.result != null ? currentBuild.result : "SUCCESS") + " after (${env.BUILD_URL})"
+            slackSend  channel: '#gdpr', color: ( currentBuild.result != null ? '#d00000' : '#36a64f' ), message: "${env.JOB_NAME} - #${env.BUILD_NUMBER} " + ( currentBuild.result != null ? currentBuild.result : "SUCCESS") + " after (${env.BUILD_URL})"
         }
     }
 }
