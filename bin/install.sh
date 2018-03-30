@@ -41,6 +41,9 @@ then
 fi
 if [ "${TRAVIS}" == "true" ]
 then
+	echo > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+	echo 'memory_limit = -1' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+	phpenv rehash;
 	DATABASE_NAME=$(grep "'dbname'" web/app/etc/env.php | sed -e "s/'/ /g" | awk '{print $3}')
 	DATABASE_USER=$(grep "'username'" web/app/etc/env.php | sed -e "s/'/ /g" | awk '{print $3}')
 	DATABASE_PASSWORD=$(grep "'password'" web/app/etc/env.php | sed -e "s/'/ /g" | awk '{print $3}')
@@ -49,7 +52,7 @@ GRANT USAGE ON *.* TO '${DATABASE_USER}'@'localhost' IDENTIFIED BY '${DATABASE_P
 CREATE DATABASE IF NOT EXISTS \`${DATABASE_NAME}\` ;
 GRANT ALL PRIVILEGES ON \`${DATABASE_NAME}\`.* TO '${DATABASE_USER}'@'localhost' ;" | mysql -f
 	cd web
-	${PHP} -d xdebug.max_nesting_level=250 -d memory_limit=-1 -d display_errors bin/magento setup:install --verbose \
+	${PHP} bin/magento setup:install --verbose \
 		--db-host=localhost \
 		--db-name="${DATABASE_NAME}" \
 		--db-user="${DATABASE_USER}" \
