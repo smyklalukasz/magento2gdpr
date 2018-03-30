@@ -41,7 +41,7 @@ PHPMAJOR=$(echo ${PHPVERSION} | sed -E 's/\.[0-9]+//g')
 PHPMINOR=$(echo ${PHPVERSION} | sed -E 's/[0-9]+\.//g')
 if [ "${PHPMAJOR}" -lt 7 -o "${PHPMINOR}" -gt 0 ] && command -v php7.0
 then
-        PHP=php7.0
+	PHP=php7.0
 fi
 if [ "${TRAVIS}" == "true" ]
 then
@@ -53,6 +53,7 @@ GRANT USAGE ON *.* TO '${DATABASE_USER}'@'localhost' IDENTIFIED BY '${DATABASE_P
 CREATE DATABASE IF NOT EXISTS \`${DATABASE_NAME}\` ;
 GRANT ALL PRIVILEGES ON \`${DATABASE_NAME}\`.* TO '${DATABASE_USER}'@'localhost' ;" | mysql -f
 	cd web
+	set +x
 	${PHP} bin/magento setup:install \
 		--db-host=localhost \
 		--db-name="${DATABASE_NAME}" \
@@ -70,6 +71,7 @@ GRANT ALL PRIVILEGES ON \`${DATABASE_NAME}\`.* TO '${DATABASE_USER}'@'localhost'
 		--admin-lastname=Adfab \
 		--cleanup-database \
 		--use-sample-data
+	set -x
 	cd ..
 fi
 if [ ! -z "${SHARED_DIR}" ]
