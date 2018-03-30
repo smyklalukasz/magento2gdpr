@@ -49,7 +49,7 @@ GRANT USAGE ON *.* TO '${DATABASE_USER}'@'localhost' IDENTIFIED BY '${DATABASE_P
 CREATE DATABASE IF NOT EXISTS \`${DATABASE_NAME}\` ;
 GRANT ALL PRIVILEGES ON \`${DATABASE_NAME}\`.* TO '${DATABASE_USER}'@'localhost' ;" | mysql -f
 	cd web
-	${PHP} -d xdebug.max_nesting_level=250 -d memory_limit=-1 -d display_errors bin/magento setup:install --verbose=3 \
+	${PHP} -d xdebug.max_nesting_level=250 -d memory_limit=-1 -d display_errors bin/magento setup:install --verbose \
 		--db-host=localhost \
 		--db-name="${DATABASE_NAME}" \
 		--db-user="${DATABASE_USER}" \
