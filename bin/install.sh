@@ -18,7 +18,7 @@ if ! ${COMPOSER} config http-basic.repo.magento.com.username
 then
 	${COMPOSER} config --global http-basic.repo.magento.com "${MAGENTO_PACKAGIST_BASIC_AUTH_USERNAME}" "${MAGENTO_PACKAGIST_BASIC_AUTH_PASSWORD}"
 fi
-${COMPOSER} create-project --repository-url=https://repo.magento.com/ magento/project-community-edition web
+${COMPOSER} create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=2.1.12 web
 cd web
 ${COMPOSER} require \
 	fzaninotto/faker \
