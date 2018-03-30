@@ -18,7 +18,7 @@ if ! ${COMPOSER} config http-basic.repo.magento.com.username
 then
 	${COMPOSER} config --global http-basic.repo.magento.com "${MAGENTO_PACKAGIST_BASIC_AUTH_USERNAME}" "${MAGENTO_PACKAGIST_BASIC_AUTH_PASSWORD}"
 fi
-${COMPOSER} create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=2.2.0 web
+${COMPOSER} create-project --repository-url=https://repo.magento.com/ magento/project-community-edition web
 cd web
 ${COMPOSER} require \
 	fzaninotto/faker \
@@ -42,8 +42,8 @@ fi
 if [ "${TRAVIS}" == "true" ]
 then
 	echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-	phpenv config-rm xdebug.ini
 	echo > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+	phpenv config-rm xdebug.ini
 	echo 'memory_limit = -1' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 	phpenv rehash;
 	DATABASE_NAME=$(grep "'dbname'" web/app/etc/env.php | sed -e "s/'/ /g" | awk '{print $3}')
@@ -54,7 +54,6 @@ GRANT USAGE ON *.* TO '${DATABASE_USER}'@'localhost' IDENTIFIED BY '${DATABASE_P
 CREATE DATABASE IF NOT EXISTS \`${DATABASE_NAME}\` ;
 GRANT ALL PRIVILEGES ON \`${DATABASE_NAME}\`.* TO '${DATABASE_USER}'@'localhost' ;" | mysql -f
 	cd web
-	${PHP} bin/magento setup:di:compile
 	${PHP} bin/magento setup:install -vvv \
 		--admin-email=admin@example.com \
 		--admin-firstname="Dev Team" \
