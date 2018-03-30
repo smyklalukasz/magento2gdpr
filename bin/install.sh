@@ -90,6 +90,7 @@ for FILE in $(ls ../../../../../ | grep -v web | grep -v config)
 do
 	ln -s ../../../../../${FILE}
 done
+cd ${DIR}/web
 ${PHP} bin/magento cache:clean
 rm -Rf \
 	pub/static/* \
