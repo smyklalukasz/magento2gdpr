@@ -1,5 +1,6 @@
 #!/bin/bash
 . "$(dirname "$0")/common.sh"
+set -x
 if [ -d web ]
 then
 	rm -Rf web
@@ -8,18 +9,19 @@ PHP=php
 PHPVERSION=$(php -v | grep -E '^PHP [0-9]+\.[0-9]+' | sed -E 's/PHP ([0-9]+)\.([0-9]+).*/\1.\2/g')
 PHPMAJOR=$(echo ${PHPVERSION} | sed -E 's/\.[0-9]+//g')
 PHPMINOR=$(echo ${PHPVERSION} | sed -E 's/[0-9]+\.//g')
+COMPOSER=composer
 if [ "${PHPMAJOR}" -lt 7 -o "${PHPMINOR}" -gt 0 ] && command -v php7.0
 then
 	PHP=php7.0
+	COMPOSER="${PHP} $(command -v composer)"
 fi
-COMPOSER=$(command -v composer)
-if ! ${PHP} ${COMPOSER} config http-basic.repo.magento.com.username
+if ! ${COMPOSER} config http-basic.repo.magento.com.username
 then
-	${PHP} ${COMPOSER} config --global http-basic.repo.magento.com "${MAGENTO_PACKAGIST_BASIC_AUTH_USERNAME}" "${MAGENTO_PACKAGIST_BASIC_AUTH_PASSWORD}"
+	${COMPOSER} config --global http-basic.repo.magento.com "${MAGENTO_PACKAGIST_BASIC_AUTH_USERNAME}" "${MAGENTO_PACKAGIST_BASIC_AUTH_PASSWORD}"
 fi
-${PHP} ${COMPOSER} create-project --repository-url=https://repo.magento.com/ magento/project-community-edition web
+${COMPOSER} create-project --repository-url=https://repo.magento.com/ magento/project-community-edition web
 cd web
-${PHP} ${COMPOSER} require \
+${COMPOSER} require \
 	fzaninotto/faker \
 	magento/module-catalog-sample-data \
 	magento/module-configurable-sample-data \
