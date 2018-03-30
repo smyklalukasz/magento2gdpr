@@ -54,25 +54,27 @@ GRANT USAGE ON *.* TO '${DATABASE_USER}'@'localhost' IDENTIFIED BY '${DATABASE_P
 CREATE DATABASE IF NOT EXISTS \`${DATABASE_NAME}\` ;
 GRANT ALL PRIVILEGES ON \`${DATABASE_NAME}\`.* TO '${DATABASE_USER}'@'localhost' ;" | mysql -f
 	cd web
-	${PHP} bin/magento setup:install --verbose \
+	${PHP} bin/magento setup:install -vvv \
+		--admin-email=admin@example.com \
+		--admin-firstname="Dev Team" \
+		--admin-lastname=Adfab \
+		--admin-password="${DATABASE_PASSWORD}" \
+		--admin-user=admin \
+		--admin-use-security-key=0 \
+		--backend-frontname="admin" \
+		--base-url=http://localhost \
+		--base-url-secure=https://localhost \
+		--cleanup-database \
+		--currency=EUR \
 		--db-host=localhost \
 		--db-name="${DATABASE_NAME}" \
 		--db-user="${DATABASE_USER}" \
 		--db-password="${DATABASE_PASSWORD}" \
-		--base-url=http://localhost \
-		--base-url-secure=https://localhost \
 		--language=fr_FR \
+		--session-save="files" \
 		--timezone=Europe/Paris \
-		--currency=EUR \
-		--admin-user=admin \
-		--admin-password="${DATABASE_PASSWORD}" \
-		--admin-email=admin@example.com \
-		--admin-firstname="Dev Team" \
-		--admin-lastname=Adfab \
-		--cleanup-database \
 		--use-sample-data \
-		--use-rewrites=1 \
-		--admin-use-security-key=0
+		--use-rewrites=1
 	cd ..
 fi
 if [ ! -z "${SHARED_DIR}" ]
