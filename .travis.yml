@@ -1,6 +1,28 @@
+sudo: required
+dist: trusty
+group: edge
+addons:
+  apt:
+    packages:
+      - mysql-server-5.6
+      - mysql-client-core-5.6
+      - mysql-client-5.6
 language: php
 php:
-- '7.0'
+  - 7.0
+env:
+  global:
+    - COMPOSER_BIN_DIR=~/bin
+    - INTEGRATION_SETS=3
+    - NODE_JS_VERSION=6
+    - MAGENTO_HOST_NAME="magento2.travis"
+cache:
+  apt: true
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/.nvm
+    - $HOME/node_modules
+    - $HOME/yarn.lock
 services:
 - mysql
 cache:

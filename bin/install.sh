@@ -41,6 +41,8 @@ then
 fi
 if [ "${TRAVIS}" == "true" ]
 then
+	echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+	phpenv config-rm xdebug.ini
 	echo > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
 	echo 'memory_limit = -1' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 	phpenv rehash;
