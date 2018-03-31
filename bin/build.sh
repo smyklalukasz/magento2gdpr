@@ -1,4 +1,4 @@
 #!/bin/bash
 . "$(dirname "$0")/common.sh"
-mkdir build
+mkdir -p build
 touch build/.gitkeep

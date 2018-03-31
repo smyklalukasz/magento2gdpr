@@ -40,7 +40,7 @@ pipeline {
             }
             steps {
                 wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
-                    sh 'bin/deploy.sh Continuous'
+                    sh 'bin/deploy.sh'
                 }
             }
         }
