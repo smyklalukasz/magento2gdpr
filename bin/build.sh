@@ -1,4 +1,4 @@
 #!/bin/bash
-LOCALDIR=`dirname $0`
-. ${LOCALDIR}/common.sh
-cd ${LOCALDIR}/..
+. "$(dirname "$0")/common.sh"
+mkdir -p build
+touch build/.gitkeep

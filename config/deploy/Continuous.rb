@@ -1,4 +1,3 @@
-set :stage, :Continuous
 server ENV['DEPLOY_CONTINUOUS_SERVER'], user: ENV['DEPLOY_CONTINUOUS_USER'], roles: %w{app db web}
 if "#{fetch(:branch)}" == "master"
   set :current_domain, "#{fetch(:application)}." + ENV['DEPLOY_CONTINUOUS_DOMAIN']

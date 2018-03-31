@@ -1,6 +1,10 @@
 language: php
 php:
-- '7.0'
+- 7.0
+cache:
+  apt: true
+  directories:
+  - $HOME/.composer/cache
 services:
 - mysql
 cache:
