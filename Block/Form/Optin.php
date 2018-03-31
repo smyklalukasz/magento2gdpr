@@ -50,7 +50,7 @@ class Optin extends \Magento\Framework\View\Element\Template
      * @return boolean
      */
     public function displayThirdParty() {
-        return $this->helper->getPersonnalizedSuggestionsActive();
+        return $this->helper->getThirdPartyActive();
     }
 
     /**

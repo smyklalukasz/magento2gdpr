@@ -9,7 +9,7 @@ pipeline {
                 wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
                     sh 'bin/decrypt.sh && DEPLOY_ENVIRONMENT=Build bin/install.sh && bin/build.sh'
                 }
-                archiveArtifacts artifacts: 'build/*'
+                archiveArtifacts artifacts: 'build/**'
             }
         }
         stage('Test') {
@@ -17,6 +17,9 @@ pipeline {
                 wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
                     sh 'bin/test.sh'
                 }
+                dry pattern: 'build/cpd.xml'
+                checkstyle pattern: 'build/checkstyle.xml'
+                pmd pattern: 'build/mess.xml'
                 junit 'build/test.xml'
                 publishHTML([
                     allowMissing: true,
@@ -30,19 +33,24 @@ pipeline {
             }
         }
         stage('Deploy') {
+            when {
+                expression {
+                    return env.CHANGE_ID == null
+                }
+            }
             steps {
                 wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
-                    sh 'bin/deploy.sh Continuous'
+                    sh 'bin/deploy.sh'
                 }
             }
         }
     }
     post {
-        success {
-            slackSend  channel: '#build', color: '#00FF00', message: "${env.JOB_NAME} - #${env.BUILD_NUMBER} Success after (${env.BUILD_URL})"
+        changed {
+            slackSend  channel: '#gdpr', color: ( currentBuild.result != null && currentBuild.result != "SUCCESS" ? ( currentBuild.result == "UNSTABLE" ? '#f5a623' : '#d00000' ) : '#36a64f' ), message: "${env.JOB_NAME} - #${env.BUILD_NUMBER} " + ( currentBuild.result != null ? currentBuild.result : "SUCCESS") + " after " + currentBuild.durationString + " (${env.BUILD_URL})"
         }
-        failure {
-            slackSend  channel: '#build', color: '#FF0000', message: "${env.JOB_NAME} - #${env.BUILD_NUMBER} Failure after (${env.BUILD_URL})"
+        success {
+            cleanWs()
         }
     }
 }

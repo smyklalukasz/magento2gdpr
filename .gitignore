@@ -42,5 +42,8 @@ Thumbs.db
 
 # Misc
 /bin/variables.sh
+/archive.tar.gz
 /secrets/*
 !/secrets/.gitkeep
+/build
+/web

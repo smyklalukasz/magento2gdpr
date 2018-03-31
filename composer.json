@@ -11,9 +11,9 @@
     "minimum-stability": "dev",
     "require": {
         "fzaninotto/faker": "*",
-        "magento/module-customer": "100.*",
-        "magento/module-quote": "100.*",
-        "magento/module-sales": "100.*",
+        "magento/module-customer": "*",
+        "magento/module-quote": "*",
+        "magento/module-sales": "*",
         "sabas/edifact": "*"
     },
     "autoload": {
