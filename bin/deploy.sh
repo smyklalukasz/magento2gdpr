@@ -30,7 +30,7 @@ then
 else
 	echo -e "\033[1;32mDeploying to \"${DEPLOY_ENVIRONMENT}\"\033[0m"
 fi
-/usr/bin/cap "${DEPLOY_ENVIRONMENT}" deploy --dry-run
+/usr/bin/cap "${DEPLOY_ENVIRONMENT}" deploy
 
 ### Tag
 if [ "${DEPLOY_ENVIRONMENT}" != "Continuous" ]

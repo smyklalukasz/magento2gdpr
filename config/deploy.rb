@@ -6,7 +6,7 @@ set :linked_dirs, ["web/pub/media", "web/pub/static", "web/var"]
 set :log_level, :info
 set :repo_url, "git@github.com:AdFabConnect/magento2gdpr.git"
 set :scm, :copy
-set :stages, %w(Continuous Test Production)
+set :stages, %w(Continuous Production)
 set :use_sudo, false
 
 namespace :deploy do
