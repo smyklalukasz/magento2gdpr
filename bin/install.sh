@@ -41,11 +41,14 @@ then
 fi
 if [ "${TRAVIS}" == "true" ]
 then
-	echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-	echo > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-	phpenv config-rm xdebug.ini
-	echo 'memory_limit = -1' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-	phpenv rehash;
+	if command -v phpenv
+	then
+		echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+		echo > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+		phpenv config-rm xdebug.ini
+		echo 'memory_limit = -1' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+		phpenv rehash;
+	fi
 	DATABASE_NAME=$(grep "'dbname'" web/app/etc/env.php | sed -e "s/'/ /g" | awk '{print $3}')
 	DATABASE_USER=$(grep "'username'" web/app/etc/env.php | sed -e "s/'/ /g" | awk '{print $3}')
 	DATABASE_PASSWORD=$(grep "'password'" web/app/etc/env.php | sed -e "s/'/ /g" | awk '{print $3}')
@@ -54,27 +57,32 @@ GRANT USAGE ON *.* TO '${DATABASE_USER}'@'localhost' IDENTIFIED BY '${DATABASE_P
 CREATE DATABASE IF NOT EXISTS \`${DATABASE_NAME}\` ;
 GRANT ALL PRIVILEGES ON \`${DATABASE_NAME}\`.* TO '${DATABASE_USER}'@'localhost' ;" | mysql -f
 	cd web
-	${PHP} bin/magento setup:install -vvv \
-		--admin-email=admin@example.com \
-		--admin-firstname="Dev Team" \
-		--admin-lastname=Adfab \
-		--admin-password="${DATABASE_PASSWORD}" \
-		--admin-user=admin \
-		--admin-use-security-key=0 \
-		--backend-frontname="admin" \
-		--base-url=http://localhost \
-		--base-url-secure=https://localhost \
-		--cleanup-database \
-		--currency=EUR \
-		--db-host=localhost \
-		--db-name="${DATABASE_NAME}" \
-		--db-user="${DATABASE_USER}" \
-		--db-password="${DATABASE_PASSWORD}" \
-		--language=fr_FR \
-		--session-save="files" \
-		--timezone=Europe/Paris \
-		--use-sample-data \
-		--use-rewrites=1
+	magento_install() {
+		rm -Rf var/cache/* var/generation/* var/di/* var/page_cache/*
+		${PHP} bin/magento setup:install -vvv \
+			--admin-email=admin@example.com \
+			--admin-firstname="Dev Team" \
+			--admin-lastname=Adfab \
+			--admin-password="${DATABASE_PASSWORD}" \
+			--admin-user=admin \
+			--admin-use-security-key=0 \
+			--backend-frontname="admin" \
+			--base-url=http://localhost \
+			--base-url-secure=https://localhost \
+			--cleanup-database \
+			--currency=EUR \
+			--db-host=localhost \
+			--db-name="${DATABASE_NAME}" \
+			--db-user="${DATABASE_USER}" \
+			--db-password="${DATABASE_PASSWORD}" \
+			--language=fr_FR \
+			--session-save="files" \
+			--timezone=Europe/Paris \
+			--use-sample-data \
+			--use-rewrites=1 \
+			--no-interaction
+	}
+	magento_install || magento_install
 	cd ..
 fi
 if [ ! -z "${SHARED_DIR}" ]
