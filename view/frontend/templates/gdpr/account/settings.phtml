@@ -24,14 +24,40 @@ if ( $this->displayExport() ) { ?>
 </div>
 <?php }
 if ( $this->displayAccountDeletion() ) { ?>
-<div class="block block-dashboard-info">
-    <div class="block-title"><strong><?php /* @escapeNotVerified */ echo __('Danger zone: account deletion') ?></strong></div>
-    <div class="block-content">
-        <div class="box-actions">
-            <a class="action edit" href="<?php echo  $this->getUrl('privacy/delete/') ?>">
-                <span><?php /* @escapeNotVerified */ echo __('Delete my account'); ?></span>
-            </a>
+    <div class="block block-dashboard-info">
+        <div class="block-title"><strong><?php /* @escapeNotVerified */ echo __('Account deletion') ?></strong></div>
+        <div class="block-content">
+            <div class="box-actions">
+                <a id="account-deletion" class="action delete" href="<?php echo  $this->getUrl('privacy/delete/') ?>">
+                    <span><?php /* @escapeNotVerified */ echo __('Delete my account'); ?></span>
+                </a>
+            </div>
         </div>
     </div>
-</div>
-<?php }
+<?php } ?>
+
+<script type = 'text/javascript'>
+    require([
+            'jquery',
+            'Magento_Ui/js/modal/confirm'
+        ],
+        function ($, confirmation) {
+            $('#account-deletion').on('click', function (event) {
+                event.preventDefault();
+
+                var url = event.currentTarget.href;
+                confirmation({
+                    title: 'Account deletion',
+                    content: 'Are you sure you want to delete your account? (This operation cannot be undone)',
+                    actions: {
+                        confirm: function () {
+                            window.location.href = url;
+                        },
+                        cancel: function () {},
+                        always: function () {}
+                    }
+                });
+                return false;
+            });
+        });
+</script>
