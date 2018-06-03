@@ -13,7 +13,7 @@
 <?php }
 if ( $this->displayExport() ) { ?>
 <div class="block block-dashboard-info">
-    <div class="block-title"><strong><?php /* @escapeNotVerified */ echo __('Export your personnal data') ?></strong></div>
+    <div class="block-title"><strong><?php /* @escapeNotVerified */ echo __('Export your personal data') ?></strong></div>
     <div class="block-content">
         <div class="box-actions">
             <a class="action edit" href="<?php echo $this->getUrl('privacy/export/') ?>">
@@ -39,7 +39,8 @@ if ( $this->displayAccountDeletion() ) { ?>
 <script type = 'text/javascript'>
     require([
             'jquery',
-            'Magento_Ui/js/modal/confirm'
+            'Magento_Ui/js/modal/confirm',
+            'mage/translate'
         ],
         function ($, confirmation) {
             $('#account-deletion').on('click', function (event) {
@@ -47,8 +48,9 @@ if ( $this->displayAccountDeletion() ) { ?>
 
                 var url = event.currentTarget.href;
                 confirmation({
-                    title: 'Account deletion',
-                    content: 'Are you sure you want to delete your account? (This operation cannot be undone)',
+                    title: "<?php echo  __('Account deletion'); ?>",
+                    content: "<?php echo  __('Are you sure you want to delete your account? (This operation cannot be undone)'); ?>",
+                    closeText: '<?php echo __('Close'); ?>',
                     actions: {
                         confirm: function () {
                             window.location.href = url;
