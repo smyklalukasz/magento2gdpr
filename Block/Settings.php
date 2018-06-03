@@ -56,8 +56,10 @@ class Settings extends \Magento\Customer\Block\Account\Dashboard
         $customerId = $this->customerSession->getCustomerId();
         $customer = $this->customerRepository->getById($customerId);
         /* @var $customer \Magento\Customer\Model\Data\Customer */
-        $block->setThirdParty( $customer->getCustomAttribute('third_party')->getValue() );
-        $block->setPersonnalizedSuggestions( $customer->getCustomAttribute('personnalized_suggestions')->getValue() );
+        $thirdParty = $customer->getCustomAttribute('third_party') ? $customer->getCustomAttribute('third_party')->getValue(): 0;
+        $suggestions = $customer->getCustomAttribute('personnalized_suggestions')? $customer->getCustomAttribute('personnalized_suggestions')->getValue(): 0;
+        $block->setThirdParty($thirdParty);
+        $block->setPersonnalizedSuggestions($suggestions);
         return parent::_prepareLayout();
     }
 
