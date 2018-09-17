@@ -6,7 +6,7 @@
  */
 if ( $this->displayPersonnalizedSuggestions() ) { ?>
 <div id="gdpr-personnalized-suggestions-box" class="field choice gdpr">
-    <input type="checkbox" name="personnalized_suggestions" class="checkbox" id="account-form-personnalized-suggestions" class="input-text" data-validate="{required:false}" value="1" title="<?php /* @escapeNotVerified */ echo __('Accept user personalization') ?>" <?php if ( $this->getPersonnalizedSuggestions() ) { ?>checked="checked" <?php } ?>/>
+    <input type="checkbox" name="personnalized_suggestions" class="checkbox required-entry" data-validate="{required:true}" autocomplete="off" aria-required="true" id="account-form-personnalized-suggestions" value="1" title="<?php /* @escapeNotVerified */ echo __('Accept user personalization') ?>" <?php if ( $this->getPersonnalizedSuggestions() ) { ?>checked="checked" <?php } ?>/>
     <label for="account-form-lized-suggestions" class="label"><span><?php /* @escapeNotVerified */ echo __('Accept user personalization') ?></span></label>
     <span class="tooltip wrapper">
         <a class="link tooltip toggle" href="/terms-conditions-of-sale" target="_blank"><?php /* @escapeNotVerified */ echo __('What\'s this?') ?></a>
